@@ -42,4 +42,16 @@
             android:contentDescription="@string/description_next"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cheat_button"
+            android:text="@string/cheat_button"
+            android:textColor="#aa0000"/>
+    </LinearLayout>
+
 </LinearLayout>
