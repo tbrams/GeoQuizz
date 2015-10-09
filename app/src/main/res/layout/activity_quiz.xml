@@ -21,7 +21,8 @@
             android:id="@+id/prev_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@mipmap/arrow_left"/>
+            android:src="@mipmap/arrow_left"
+            android:contentDescription="@string/description_previous"/>
 
         <Button
             android:id="@+id/true_button"
@@ -37,7 +38,8 @@
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@mipmap/arrow_right" />
+            android:src="@mipmap/arrow_right"
+            android:contentDescription="@string/description_next"/>
 
     </LinearLayout>
 </LinearLayout>
