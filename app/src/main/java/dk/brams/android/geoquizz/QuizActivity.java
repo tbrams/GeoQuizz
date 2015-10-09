@@ -48,6 +48,7 @@ public class QuizActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
             mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER, false);
+            updateQuestion();
         }
 
         mTrueButton = (Button) findViewById(R.id.true_button);
@@ -132,6 +133,7 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        updateQuestion();
         Log.d(TAG, "onResume() called");
     }
 
