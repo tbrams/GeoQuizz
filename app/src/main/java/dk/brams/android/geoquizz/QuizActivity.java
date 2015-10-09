@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton, mFalseButton;
-    private Button mNextButton;
+    private ImageButton mPrevButton, mNextButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[] {
@@ -47,15 +48,31 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mNextButton = (Button) findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        mPrevButton = (ImageButton) findViewById(R.id.prev_button);
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
-                updateQuestion();
+                updateCurrentIndex(-1);
             }
         });
 
+        mNextButton = (ImageButton) findViewById(R.id.next_button);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateCurrentIndex(1);
+            }
+        });
+    }
+
+    private void updateCurrentIndex(int direction) {
+        if (direction==-1) {
+            mCurrentIndex = (mCurrentIndex - 1);
+            if (mCurrentIndex<0) mCurrentIndex=mQuestionBank.length-1;
+        } else
+            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+
+        updateQuestion();
     }
 
     private void updateQuestion() {
