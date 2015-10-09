@@ -3,10 +3,12 @@ public class Question {
 
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mDone;
 
     public Question(int textResId, boolean answerTrue) {
         this.mTextResId = textResId;
         this.mAnswerTrue = answerTrue;
+        this.mDone = false;
     }
 
     public int getTextResId() {
@@ -20,6 +22,11 @@ public class Question {
     public boolean isAnswerTrue() {
         return mAnswerTrue;
     }
+    public boolean isDone() {
+        return mDone;
+    }
+
+    public void setDone(boolean status) {mDone = status;}
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;

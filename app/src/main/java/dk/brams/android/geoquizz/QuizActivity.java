@@ -23,6 +23,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mCheatButton;
     private boolean mIsCheater;
 
+    // The Question constructor marks all questions Done=False by default
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_oceans, true),
             new Question(R.string.question_mideast, false),
@@ -48,8 +49,6 @@ public class QuizActivity extends AppCompatActivity {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
             mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER, false);
         }
-
-        updateQuestion();
 
         mTrueButton = (Button) findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +82,13 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+
         mCheatButton = (Button) findViewById(R.id.cheat_button);
+        if (mQuestionBank[mCurrentIndex].isDone()) {
+            mCheatButton.setEnabled(false);
+        } else {
+            mCheatButton.setEnabled(true);
+        }
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +100,10 @@ public class QuizActivity extends AppCompatActivity {
                 startActivityForResult(i, REQUEST_CODE_CHEAT);
             }
         });
+
+
+        updateQuestion();
+
     }
 
     @Override
@@ -164,11 +173,32 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+
+        enableDisableButtons();
+    }
+
+    private void enableDisableButtons() {
+        if (mQuestionBank[mCurrentIndex].isDone()) {
+            mTrueButton.setEnabled(false);
+            mFalseButton.setEnabled(false);
+        } else {
+            mTrueButton.setEnabled(true);
+            mFalseButton.setEnabled(true);
+        }
+
+        if (mIsCheater) {
+            mCheatButton.setEnabled(false);
+            mCheatButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
+
+        mQuestionBank[mCurrentIndex].setDone(true);
+        enableDisableButtons();
+
 
         if (mIsCheater) {
            messageResId=R.string.judgement_toast;
