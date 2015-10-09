@@ -22,4 +22,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/showAnswerButton"
         android:text="@string/show_answer_button"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/versionField"
+        android:text="@string/build_version"
+        android:padding="24dp"/>
+
 </LinearLayout>
